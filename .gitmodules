@@ -1,3 +1,0 @@
-[submodule "sol/lib/ds-test"]
-	path = sol/lib/ds-test
-	url = https://github.com/dapphub/ds-test
