@@ -1,0 +1,16 @@
+query ProposalView {
+  proposals {
+    id
+    operations {
+      id
+      index
+      target
+      value
+      data
+    }
+    predecessor
+    delay
+    timestamp
+    status
+  }
+}
