@@ -1,7 +1,7 @@
 pub const ETH_RPC_URL: &str = r#"https://crab-rpc.darwinia.network"#;
 
 pub const SUBGRAPG_URL: &str =
-    r#"http://crab-thegraph.darwinia.network/subgraphs/name/WormholeDao/TimeLock"#;
+    r#"https://crab-thegraph.darwinia.network/subgraphs/name/WormholeDao/TimeLock"#;
 
 pub const WORMHOLE_DAO_MULTISIG: &str = r#"0x0050F880c35c31c13BFd9cBb7D28AafaEcA3abd2"#;
 

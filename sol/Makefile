@@ -1,4 +1,4 @@
-all            :; build-4 build-8
+all            :  build-4 build-8
 clean          :; dapp clean
 test           :; dapp test
 build-4        :; DAPP_SRC=src/solc_0.4 DAPP_OUT=out/solc_0.4 DAPP_BUILD_OPTIMIZE_RUNS=200 dapp --use solc:0.4.24 build
