@@ -15,8 +15,9 @@ data1=0x
 
 data=$(seth calldata "schedule(address,uint256,bytes,bytes32,bytes32,uint256)" $target $value $data1 $PREDECESSOR $SALT $DELAY)
 
+# 1. WALLET send 0.1 ether to TIMELOCK
+seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK $value $data1
+# 2. TIMELOCK send 0.1 ether to TARGET
 seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK $value $data
-count=$(seth call $WALLET "transactionCount()(uint)")
-seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 ))
 
 # seth call $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT
