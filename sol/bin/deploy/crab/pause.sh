@@ -20,4 +20,4 @@ data=$(seth calldata "schedule(address,uint256,bytes,bytes32,bytes32,uint256)" $
 # count=$(seth call $WALLET "transactionCount()(uint)")
 # seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 ))
 
-seth call $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT
+seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT
