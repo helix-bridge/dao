@@ -12,9 +12,7 @@ SALT=0x0000000000000000000000000000000000000000000000000000000000000001
 PREDECESSOR=0x0000000000000000000000000000000000000000000000000000000000000000
 DELAY=1800
 
-amount=47077527.688786189
-
-value1=$(seth --to-wei $amount ether)
+value1=$(seth --to-wei 47077527.688786189 ether)
 data1=$(seth calldata "deposit()")
 data2=$(seth calldata "approve(address,uint)" $Erc20Sub2SubBacking $value1)
 value3=$(seth --to-wei 40 ether)
@@ -27,14 +25,16 @@ datas=[$data1,$data2,$data3]
 
 data=$(seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32,uint256)" $targets $values $datas $PREDECESSOR $SALT $DELAY)
 
-# seth call -F $WALLET $TIMELOCK $data
+seth call -F $WALLET $TIMELOCK $data
 
-# 1. WALLET send 0.1 RING to TIMELOCK
-# seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK $value1 $data1
-# 2.1 TIMELOCK send deposit 0.1 RING
-# 2.2 TIMELOCK send approve 0.1 RING to Erc20Sub2SubBacking
-# 2.3 TIMELOCK send lock    0.1 RING to Erc20Sub2SubBacking
+# amount=47077527.688786189
+# 1. WALLET send $amount RING to TIMELOCK
+seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK $value1 0x
+# 2.1 TIMELOCK send deposit $amount RING  to WRING
+# 2.2 TIMELOCK send approve $amount WRING to Erc20Sub2SubBacking
+# 2.3 TIMELOCK send lock    $amount WRING to Erc20Sub2SubBacking
+seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
 
-# seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
 
-seth send $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT
+
+# seth send $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT
