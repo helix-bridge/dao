@@ -25,16 +25,14 @@ datas=[$data1,$data2,$data3]
 
 data=$(seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32,uint256)" $targets $values $datas $PREDECESSOR $SALT $DELAY)
 
-seth call -F $WALLET $TIMELOCK $data
+# seth call -F $WALLET $TIMELOCK $data
 
 # amount=47077527.688786189
 # 1. WALLET send $amount RING to TIMELOCK
-seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK $value1 0x
+# seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK $value1 0x
 # 2.1 TIMELOCK send deposit $amount RING  to WRING
 # 2.2 TIMELOCK send approve $amount WRING to Erc20Sub2SubBacking
 # 2.3 TIMELOCK send lock    $amount WRING to Erc20Sub2SubBacking
-seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
+# seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
 
-
-
-# seth send $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT
+seth send $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT
