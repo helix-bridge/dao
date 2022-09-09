@@ -13,12 +13,12 @@ DELAY=1800
 
 target=$Erc20Sub2SubMappingTokenFactoryProxy
 value=0
-data1=$(seth calldata "changeDailyLimit(address,uint256)" $xWRING 60000000000000000000000000)
+data1=$(seth calldata "changeDailyLimit(address,uint256)" $xWRING 3000000000000000000000000)
 
 data=$(seth calldata "schedule(address,uint256,bytes,bytes32,bytes32,uint256)" $target $value $data1 $PREDECESSOR $SALT $DELAY)
 
-# seth call -F $WALLET $TIMELOCK $data
+seth call -F $WALLET $TIMELOCK $data
 
 # seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
 
-seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT
+# seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT
