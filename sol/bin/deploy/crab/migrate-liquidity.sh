@@ -66,7 +66,7 @@ datas=[$data1,$data2,$data3,$data4,$data5,$data6,$data7,$data8,$data9,$data10,$d
 
 data=$(seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32,uint256)" $targets $values $datas $PREDECESSOR $SALT $DELAY)
 
-seth call -F $WALLET $TIMELOCK $data
+# seth call -F $WALLET $TIMELOCK $data
 
 seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
 
