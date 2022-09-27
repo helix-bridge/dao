@@ -16,4 +16,4 @@ data=$(seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32,
 op_hash=$(seth call $TIMELOCK "hashOperationBatch(address[],uint256[],bytes[],bytes32,bytes32)(bytes32)" $targets $values $datas $PREDECESSOR $SALT)
 seth call $TIMELOCK "getTimestamp(bytes32)(uint)" $op_hash
 
-seth call $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT
+seth send $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT
