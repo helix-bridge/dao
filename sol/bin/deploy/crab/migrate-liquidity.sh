@@ -48,17 +48,20 @@ MigrateBL=$(cal "($xRING_BL0 + $xRING_AMOUT_OUT0 + $xRING_AMOUT_OUT1) * 1.1")
 data5=$(seth calldata "approve(address,uint)" $xRING_MIGRATOR $MigrateBL)
 data6=$(seth calldata "migrateAll()")
 
+xWRING_AMOUNT_IN0=$(cal "$xRING_AMOUT_OUT0 * 10**9")
+xWRING_AMOUNT_IN1=$(cal "$WCRAB_AMOUT_OUT / 6.9362")
+
 data7=$(seth calldata "approve(address,uint)" $ROUTER $USDT_AMOUT_OUT)
-data8=$(seth calldata "approve(address,uint)" $ROUTER $(($xRING_AMOUT_OUT0 + $xRING_AMOUT_OUT1)))
+data8=$(seth calldata "approve(address,uint)" $ROUTER $(cal "$xWRING_AMOUNT_IN0 + $xWRING_AMOUNT_IN1"))
 data9=$(seth calldata "approve(address,uint)" $ROUTER $WCRAB_AMOUT_OUT)
 
 USDT_MIN=$(cal "$USDT_AMOUT_OUT * 0.99")
-xWRING_MIN0=$(cal "$xRING_AMOUT_OUT0 * 0.99")
-data10=$(seth calldata "addLiquidity(address,address,uint,uint,uint,uint,address,uint)" $USDT $xWRING $USDT_AMOUT_OUT $xRING_AMOUT_OUT0 $USDT_MIN $xWRING_MIN0 $TIMELOCK $DEADLINE)
+xWRING_MIN0=$(cal "$xWRING_AMOUNT_IN0 * 0.99")
+data10=$(seth calldata "addLiquidity(address,address,uint,uint,uint,uint,address,uint)" $USDT $xWRING $USDT_AMOUT_OUT $xWRING_AMOUNT_IN0 $USDT_MIN $xWRING_MIN0 $TIMELOCK $DEADLINE)
 
-WCRAB_MIN=$(cal "$WCRAB_AMOUT_OUT * 0.99")
-xWRING_MIN1=$(cal "$xRING_AMOUT_OUT1 * 0.99")
-data11=$(seth calldata "addLiquidity(address,address,uint,uint,uint,uint,address,uint)" $WCRAB $xWRING $WCRAB_AMOUT_OUT $xRING_AMOUT_OUT1 $WCRAB_MIN $xWRING_MIN1 $TIMELOCK $DEADLINE)
+WCRAB_MIN=$(cal "$WCRAB_AMOUT_OUT * 0.98")
+xWRING_MIN1=$(cal "$xWRING_AMOUNT_IN1 * 0.98")
+data11=$(seth calldata "addLiquidity(address,address,uint,uint,uint,uint,address,uint)" $WCRAB $xWRING $WCRAB_AMOUT_OUT $xWRING_AMOUNT_IN1 $WCRAB_MIN $xWRING_MIN1 $TIMELOCK $DEADLINE)
 
 targets=[$USDT_xRING_PAIR,$ROUTER,$WCRAB_xRING_PAIR,$ROUTER,$xRING,$xRING_MIGRATOR,$USDT,$xWRING,$WCRAB,$ROUTER,$ROUTER]
 values=[0,0,0,0,0,0,0,0,0,0,0]
@@ -66,11 +69,11 @@ datas=[$data1,$data2,$data3,$data4,$data5,$data6,$data7,$data8,$data9,$data10,$d
 
 data=$(seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32,uint256)" $targets $values $datas $PREDECESSOR $SALT $DELAY)
 
-# seth call -F $WALLET $TIMELOCK $data
+seth call -F $WALLET $TIMELOCK $data
 
-seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
+# seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
 
-count=$(seth call $WALLET "transactionCount()(uint)")
-seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 ))
+# count=$(seth call $WALLET "transactionCount()(uint)")
+# seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 ))
 
 # seth call $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT
