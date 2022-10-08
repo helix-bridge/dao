@@ -1,0 +1,19 @@
++ WALLET=0xBd1a110ec476b4775c43905000288881367B1a88
++ WRING=0xE7578598Aac020abFB918f33A20faD5B71d670b4
++ value=982875623961051257000000000
+++ seth calldata 'deposit()'
++ data=0xd0e30db0
++ seth call -F 0xBd1a110ec476b4775c43905000288881367B1a88 -V 982875623961051257000000000 0xE7578598Aac020abFB918f33A20faD5B71d670b4 0xd0e30db0
+0x
++ seth send 0xBd1a110ec476b4775c43905000288881367B1a88 'submitTransaction(address,uint,bytes)' 0xE7578598Aac020abFB918f33A20faD5B71d670b4 982875623961051257000000000 0xd0e30db0
+seth-send: Published transaction with 164 bytes of calldata.
+seth-send: 0x342ac638aed4c733ef8bda371346285d7102e89efec0e11b2c8217d8ac27333e
+seth-send: Waiting for transaction receipt....
+seth-send: Transaction included in block 10600443.
+++ seth call 0xBd1a110ec476b4775c43905000288881367B1a88 'transactionCount()(uint)'
++ count=8
++ seth call 0xBd1a110ec476b4775c43905000288881367B1a88 'transactions(uint)(address,uint,bytes,bool)' 7
+0xE7578598Aac020abFB918f33A20faD5B71d670b4
+982875623961051257000000000
+0xd0e30db0
+false
