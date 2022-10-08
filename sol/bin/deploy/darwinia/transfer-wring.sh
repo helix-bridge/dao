@@ -12,7 +12,7 @@ data=$(seth calldata "transfer(address,uint256)" $BACKING $wad)
 
 seth call -F $WALLET $WRING $data
 
-# 1. send 20kw wring to backing
+# 1. send 2kw wring to backing
 seth send $WALLET "submitTransaction(address,uint,bytes)" $WRING 0 $data
 
 count=$(seth call $WALLET "transactionCount()(uint)")
