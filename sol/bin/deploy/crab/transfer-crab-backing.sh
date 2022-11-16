@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -eox pipefail
+
+WALLET=0x0050F880c35c31c13BFd9cBb7D28AafaEcA3abd2
+TIMELOCK=0x2401224012bAE7C2f217392665CA7abC16dCDE1e
+
+SALT=0x000000000000000000000000000000000000000000000000000000000000000f
+PREDECESSOR=0x0000000000000000000000000000000000000000000000000000000000000000
+DELAY=1800
+
+# crab2parachain-smart2para-crab.backingProxy
+target=0x8c585F9791EE5b4B23fe82888cE576DBB69607eB
+value=462005343212648000000000
+data1=0x
+
+data=$(seth calldata "schedule(address,uint256,bytes,bytes32,bytes32,uint256)" $target $value $data1 $PREDECESSOR $SALT $DELAY)
+
+seth call -F $WALLET $TIMELOCK $data
+
+seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
+count=$(seth call $WALLET "transactionCount()(uint)")
+seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 ))
+
+# op_hash=$(seth call $TIMELOCK "hashOperation(address,uint256,bytes,bytes32,bytes32)(bytes32)" $target $value $data $PREDECESSOR $SALT)
+# date -r $(seth call $TIMELOCK "getTimestamp(bytes32)(uint)" $op_hash) '+%Y-%m-%d %H:%M:%S'
+
+# seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT
