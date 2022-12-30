@@ -20,5 +20,5 @@ data=$(seth calldata "schedule(address,uint256,bytes,bytes32,bytes32,uint256)" $
 
 seth call -F $WALLET $TIMELOCK $data
 
-# seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
+seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
 # seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT
