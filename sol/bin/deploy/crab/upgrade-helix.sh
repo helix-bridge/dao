@@ -18,7 +18,10 @@ data1=$(seth calldata "upgrade(address,address)" "$PROXY" "$LOGIC")
 
 data=$(seth calldata "schedule(address,uint256,bytes,bytes32,bytes32,uint256)" $target $value $data1 $PREDECESSOR $SALT $DELAY)
 
-seth call -F $WALLET $TIMELOCK $data
+# seth call -F $WALLET $TIMELOCK $data
+# seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
 
-seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
-# seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT
+# op_hash=$(seth call $TIMELOCK "hashOperation(address,uint256,bytes,bytes32,bytes32)(bytes32)" $target $value $data1 $PREDECESSOR $SALT)
+# date -r $(seth call $TIMELOCK "getTimestamp(bytes32)(uint)" $op_hash) '+%Y-%m-%d %H:%M:%S'
+
+seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT
