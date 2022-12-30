@@ -17,12 +17,12 @@ data1=$(seth calldata "setWToken(address)" "$WTOKEN")
 
 data=$(seth calldata "schedule(address,uint256,bytes,bytes32,bytes32,uint256)" $target $value $data1 $PREDECESSOR $SALT $DELAY)
 
-seth call -F $WALLET $TIMELOCK $data
-seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
-count=$(seth call $WALLET "transactionCount()(uint)")
-seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 ))
+# seth call -F $WALLET $TIMELOCK $data
+# seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
+# count=$(seth call $WALLET "transactionCount()(uint)")
+# seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 ))
 
-# op_hash=$(seth call $TIMELOCK "hashOperation(address,uint256,bytes,bytes32,bytes32)(bytes32)" $target $value $data1 $PREDECESSOR $SALT)
-# date -r $(seth call $TIMELOCK "getTimestamp(bytes32)(uint)" $op_hash) '+%Y-%m-%d %H:%M:%S'
+op_hash=$(seth call $TIMELOCK "hashOperation(address,uint256,bytes,bytes32,bytes32)(bytes32)" $target $value $data1 $PREDECESSOR $SALT)
+date -r $(seth call $TIMELOCK "getTimestamp(bytes32)(uint)" $op_hash) '+%Y-%m-%d %H:%M:%S'
 
-# seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT
+seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT
