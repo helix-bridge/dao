@@ -1,21 +1,16 @@
-+ WALLET=0xBd1a110ec476b4775c43905000288881367B1a88
++ WALLET=0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A
 + LNBRIDGE=0x3B9E571AdeCB0c277486036D6097E9C2CCcfa9d9
 ++ seth --to-wei 2000000 ether
 + wad=2000000000000000000000000
-+ seth send 0xBd1a110ec476b4775c43905000288881367B1a88 'submitTransaction(address,uint,bytes)' 0x3B9E571AdeCB0c277486036D6097E9C2CCcfa9d9 2000000000000000000000000 0x
++ seth send 0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A 'submitTransaction(address,uint,bytes)' 0x3B9E571AdeCB0c277486036D6097E9C2CCcfa9d9 2000000000000000000000000 0x
 seth-send: Published transaction with 132 bytes of calldata.
-seth-send: 0x2d8f3ebcfb2e148d9acbd359c1fd249e1d101e1f4927b8cda360c527abead765
+seth-send: 0x1337a7c74abc14e49a1a977d0c0b4ac3cf92671a304cf50f3ec8f2358d7e5073
 seth-send: Waiting for transaction receipt....
-seth-send: Transaction included in block 12826393.
-++ seth call 0xBd1a110ec476b4775c43905000288881367B1a88 'transactionCount()(uint)'
-+ count=17
-+ seth call 0xBd1a110ec476b4775c43905000288881367B1a88 'transactions(uint)(address,uint,bytes,bool)' 16
+seth-send: Transaction included in block 12826480.
+++ seth call 0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A 'transactionCount()(uint)'
++ count=1
++ seth call 0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A 'transactions(uint)(address,uint,bytes,bool)' 0
 0x3B9E571AdeCB0c277486036D6097E9C2CCcfa9d9
 2000000000000000000000000
 0x
 false
-
-seth-send: Published transaction with 36 bytes of calldata.
-seth-send: 0x79a6f74ee4950e28383fc9a5982fb95044dc03a10ddb16f33fb84460b61708e2
-seth-send: Waiting for transaction receipt...
-seth-send: Transaction included in block 12826457.
