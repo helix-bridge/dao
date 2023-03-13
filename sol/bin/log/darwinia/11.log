@@ -14,3 +14,8 @@ seth-send: Transaction included in block 12826393.
 2000000000000000000000000
 0x
 false
+
+seth-send: Published transaction with 36 bytes of calldata.
+seth-send: 0x79a6f74ee4950e28383fc9a5982fb95044dc03a10ddb16f33fb84460b61708e2
+seth-send: Waiting for transaction receipt...
+seth-send: Transaction included in block 12826457.
