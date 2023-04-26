@@ -1,0 +1,17 @@
++ WALLET=0xBd1a110ec476b4775c43905000288881367B1a88
++ BridgeProxyAdmin=0x86c85A9bf5DEAfdeD40D9C70517883D95F50Df03
++ MESSAGE_DAO=0xB29DA7C1b1514AB342afbE6AB915252Ad3f87E4d
+++ seth calldata 'transferOwnership(address)' 0xB29DA7C1b1514AB342afbE6AB915252Ad3f87E4d
++ data=0xf2fde38b000000000000000000000000b29da7c1b1514ab342afbe6ab915252ad3f87e4d
++ seth send 0xBd1a110ec476b4775c43905000288881367B1a88 'submitTransaction(address,uint,bytes)' 0x86c85A9bf5DEAfdeD40D9C70517883D95F50Df03 0 0xf2fde38b000000000000000000000000b29da7c1b1514ab342afbe6ab915252ad3f87e4d
+seth-send: Published transaction with 196 bytes of calldata.
+seth-send: 0x1cd4e42de0e0300b3935f93019e3cee356ed5e1478ab39bb042d0bd2c371ff34
+seth-send: Waiting for transaction receipt.....
+seth-send: Transaction included in block 12488.
+++ seth call 0xBd1a110ec476b4775c43905000288881367B1a88 'transactionCount()(uint)'
++ count=20
++ seth call 0xBd1a110ec476b4775c43905000288881367B1a88 'transactions(uint)(address,uint,bytes,bool)' 19
+0x86c85A9bf5DEAfdeD40D9C70517883D95F50Df03
+0
+0xf2fde38b000000000000000000000000b29da7c1b1514ab342afbe6ab915252ad3f87e4d
+false
