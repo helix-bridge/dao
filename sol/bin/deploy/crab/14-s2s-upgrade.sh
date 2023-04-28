@@ -23,8 +23,8 @@ data=$(seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32,
 
 # seth call -F $WALLET $TIMELOCK $data
 
-seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
-count=$(seth call $WALLET "transactionCount()(uint)")
-seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 ))
+# seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data
+# count=$(seth call $WALLET "transactionCount()(uint)")
+# seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 ))
 
-# seth send $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT
+seth send $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain crab
