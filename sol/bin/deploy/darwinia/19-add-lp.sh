@@ -16,8 +16,8 @@ DEADLINE=1696783073
 wad=$(seth --to-wei 50000 ether)
 amount1Desired=$(seth --to-wei  4000000 ether)
 amount2Desired=$(seth --to-wei 40000000 ether)
-amount1Min=$(seth --to-wei  5000000 ether)
-amount2Min=$(seth --to-wei 50000000 ether)
+amount1Min=0
+amount2Min=0
 
 data1=$(seth calldata "approve(address,uint)" $SWAPTOPRICE $wad)
 data2=$(seth calldata "approve(address,uint)" $ROUTER $amount1Min)
@@ -26,7 +26,7 @@ data4=$(seth calldata "swapToPrice(address,address,uint256,uint256,uint256,uint2
 data5=$(seth calldata "addLiquidity(address,address,uint,uint,uint,uint,address,uint)" $WRING $xWCRAB $amount1Desired $amount2Desired $amount1Min $amount2Min $TIMELOCK $DEADLINE)
 data6=$(seth calldata "approve(address,uint)" $SWAPTOPRICE 0)
 
-targets=[$WRING,$WRING,$xWCRAB,$SWAPTOPRICE,$ROUTER,$WRING]
+targets=[$xWCRAB,$WRING,$xWCRAB,$SWAPTOPRICE,$ROUTER,$xWCRAB]
 values=[0,0,0,0,0,0]
 datas=[$data1,$data2,$data3,$data4,$data5,$data6]
 
@@ -36,5 +36,4 @@ seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data --ch
 count=$(seth call $WALLET "transactionCount()(uint)" --chain darwinia)
 seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 )) --chain darwinia
 
-# seth call $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT
-
+# seth call $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain darwinia

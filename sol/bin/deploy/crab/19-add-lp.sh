@@ -16,8 +16,8 @@ DEADLINE=1696783073
 wad=$(seth --to-wei 50000 ether)
 amount1Desired=$(seth --to-wei  4000000 ether)
 amount2Desired=$(seth --to-wei 40000000 ether)
-amount1Min=$(seth --to-wei  5000000 ether)
-amount2Min=$(seth --to-wei 50000000 ether)
+amount1Min=0
+amount2Min=0
 
 data1=$(seth calldata "approve(address,uint)" $SWAPTOPRICE $wad)
 data2=$(seth calldata "approve(address,uint)" $ROUTER $amount1Min)
@@ -36,4 +36,4 @@ seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data --ch
 count=$(seth call $WALLET "transactionCount()(uint)" --chain crab)
 seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 )) --chain crab
 
-# seth call $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT
+# seth call $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain crab
