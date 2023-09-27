@@ -16,8 +16,8 @@ DEADLINE=1696783073
 wad=$(seth --to-wei 50000 ether)
 amount1Desired=$(seth --to-wei  4000000 ether)
 amount2Desired=$(seth --to-wei 40000000 ether)
-amount1Min=0
-amount2Min=0
+amount1Min=$(seth --to-wei  3500000 ether)
+amount2Min=$(seth --to-wei 35000000 ether)
 
 data1=$(seth calldata "approve(address,uint)" $SWAPTOPRICE $wad)
 data2=$(seth calldata "approve(address,uint)" $ROUTER $amount1Desired)
