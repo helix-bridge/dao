@@ -8,7 +8,7 @@ ROUTER=0xB899409cDA0fFA2bF87F9c7b31f3c77D6A3a0bB0
 WALLET=0xBd1a110ec476b4775c43905000288881367B1a88
 TIMELOCK=0xA546F42BeB3DEa617b0F3Ca6995C7Df5dfCaD29D
 SWAPTOPRICE=0x4E319297F77EA8099520F3467a083050090a1d81
-SALT=0x0000000000000000000000000000000000000000000000000000000000000030
+SALT=0x0000000000000000000000000000000000000000000000000000000000000031
 PREDECESSOR=0x0000000000000000000000000000000000000000000000000000000000000000
 DELAY=1800
 
@@ -20,8 +20,8 @@ amount1Min=0
 amount2Min=0
 
 data1=$(seth calldata "approve(address,uint)" $SWAPTOPRICE $wad)
-data2=$(seth calldata "approve(address,uint)" $ROUTER $amount1Min)
-data3=$(seth calldata "approve(address,uint)" $ROUTER $amount2Min)
+data2=$(seth calldata "approve(address,uint)" $ROUTER $amount1Desired)
+data3=$(seth calldata "approve(address,uint)" $ROUTER $amount2Desired)
 data4=$(seth calldata "swapToPrice(address,address,uint256,uint256,uint256,uint256,address,uint256)" $WRING $xWCRAB 1 10 0 $wad $TIMELOCK $DEADLINE)
 data5=$(seth calldata "addLiquidity(address,address,uint,uint,uint,uint,address,uint)" $WRING $xWCRAB $amount1Desired $amount2Desired $amount1Min $amount2Min $TIMELOCK $DEADLINE)
 data6=$(seth calldata "approve(address,uint)" $SWAPTOPRICE 0)
