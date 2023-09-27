@@ -1,0 +1,39 @@
++ WALLET=0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A
++ TIMELOCK=0xA546F42BeB3DEa617b0F3Ca6995C7Df5dfCaD29D
++ WRING=0xE7578598Aac020abFB918f33A20faD5B71d670b4
+++ seth --to-wei 1000000 ether
++ wad=1000000000000000000000000
+++ seth calldata 'transfer(address,uint256)' 0xA546F42BeB3DEa617b0F3Ca6995C7Df5dfCaD29D 1000000000000000000000000
++ data=0xa9059cbb000000000000000000000000a546f42beb3dea617b0f3ca6995c7df5dfcad29d00000000000000000000000000000000000000000000d3c21bcecceda1000000
++ seth send 0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A 'submitTransaction(address,uint,bytes)' 0xE7578598Aac020abFB918f33A20faD5B71d670b4 0 0xa9059cbb000000000000000000000000a546f42beb3dea617b0f3ca6995c7df5dfcad29d00000000000000000000000000000000000000000000d3c21bcecceda1000000 --chain darwinia
+seth-send: Published transaction with 228 bytes of calldata.
+seth-send: 0x17993c4b34e10dbe265618157bd12c371be92d660b10e1ef26da986268c31366
+seth-send: Waiting for transaction receipt......
+seth-send: Transaction included in block 1087901.
+++ seth call 0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A 'transactionCount()(uint)' --chain darwinia
++ count=2
++ seth call 0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A 'transactions(uint)(address,uint,bytes,bool)' 1 --chain darwinia
+0xE7578598Aac020abFB918f33A20faD5B71d670b4
+0
+0xa9059cbb000000000000000000000000a546f42beb3dea617b0f3ca6995c7df5dfcad29d00000000000000000000000000000000000000000000d3c21bcecceda1000000
+false
+
++ WALLET=0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A
++ TIMELOCK=0xA546F42BeB3DEa617b0F3Ca6995C7Df5dfCaD29D
++ WRING=0xE7578598Aac020abFB918f33A20faD5B71d670b4
+++ seth --to-wei 1000000 ether
++ wad=1000000000000000000000000
+++ seth calldata 'deposit()'
++ data=0xd0e30db0
++ seth send 0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A 'submitTransaction(address,uint,bytes)' 0xE7578598Aac020abFB918f33A20faD5B71d670b4 1000000000000000000000000 0xd0e30db0 --chain darwinia
+seth-send: Published transaction with 164 bytes of calldata.
+seth-send: 0x6b87998c25f695221f4f9fa42910f7fab9995a90c42b34e7d4c2c51407882a85
+seth-send: Waiting for transaction receipt.....
+seth-send: Transaction included in block 1088229.
+++ seth call 0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A 'transactionCount()(uint)' --chain darwinia
++ count=3
++ seth call 0x394607dAC12ea8C6095D68E3a7E5c9d40Cf0df9A 'transactions(uint)(address,uint,bytes,bool)' 2 --chain darwinia
+0xE7578598Aac020abFB918f33A20faD5B71d670b4
+1000000000000000000000000
+0xd0e30db0
+false
