@@ -14,10 +14,10 @@ denny=0x52386BE2397e8EAc26298F733b390684203fB580
 ranji=0xe59261f6D4088BcD69985A3D369Ff14cC54EF1E5
 xiaoch=0xd2c7008400F54aA70Af01CF8C747a4473246593E
 
-bytecode=$(jq -r ".contracts[\"src/solc_0.8/TimeLock.f.sol\"].TimeLock.evm.bytecode.object" out/dapp.sol.json)
+bytecode=$(jq -r ".contracts[\"src/solc_0.8/TimeLock.f.sol\"].TimeLock.evm.bytecode.object" out/solc_0.8/dapp.sol.json)
 args=$(ethabi encode params -v uint256 1800 \
-  -v address[] "[${safe:2},${deployer:2}]" \
-  -v address[] "[00E3993566b34e5367d1C602439997BD08c11FF7,52386BE2397e8EAc26298F733b390684203fB580,7aE77149ed38c5dD313e9069d790Ce7085caf0A6,e59261f6D4088BcD69985A3D369Ff14cC54EF1E5,d2c7008400F54aA70Af01CF8C747a4473246593E]"
+  -v address[] "[${safe:2}]" \
+  -v address[] "[${deployer:2},${alex:2},${denny:2},${ranji:2},${xiaoch:2}]"
 )
 creationCode=0x$bytecode$args
 # salt, creationCode

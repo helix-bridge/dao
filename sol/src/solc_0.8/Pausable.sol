@@ -1,5 +1,5 @@
 // OpenZeppelin Contracts v4.4.1 (security/Pausable.sol)
-
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 /**
