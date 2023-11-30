@@ -17,7 +17,7 @@ amount=$(seth --to-wei 176905.031173004421091494 ether)
 fee=$(seth --to-wei 160 ether)
 targets=[$WRING,$LNBRIDGE]
 values=[0,$fee]
-data1=$(seth calldata "withdraw(address)" $wad)
+data1=$(seth calldata "withdraw(uint)" $wad)
 data2=$(seth calldata "lockAndRemoteIssuingNative(uint32,uint256,address,uint256)" 6501 2000000 0x2401224012bAE7C2f217392665CA7abC16dCDE1e $amount)
 datas=[$data1,$data2]
 
@@ -32,4 +32,4 @@ seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 )
 # op_hash=$(seth call $TIMELOCK "hashOperation(address,uint256,bytes,bytes32,bytes32)(bytes32)" $target $value $data1 $PREDECESSOR $SALT --chain darwinia)
 # date -r $(seth call $TIMELOCK "getTimestamp(bytes32)(uint)" $op_hash --chain darwinia) '+%Y-%m-%d %H:%M:%S'
 
-# seth send -F $ETH_FROM $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT --chain darwinia
+# seth send -F $ETH_FROM $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain darwinia
