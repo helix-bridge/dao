@@ -14,16 +14,15 @@ DELAY=1800
 
 wad=$(seth --to-wei 177225.031173004421091494 ether)
 amount=$(seth --to-wei 176905.031173004421091494 ether)
-fee=$(seth --to-wei 160 ether)
 targets=[$WRING,$LNBRIDGE]
-values=[0,$fee]
+values=[0,$wad]
 data1=$(seth calldata "withdraw(uint)" $wad)
 data2=$(seth calldata "lockAndRemoteIssuingNative(uint32,uint256,address,uint256)" 6501 2000000 0x2401224012bAE7C2f217392665CA7abC16dCDE1e $amount)
 datas=[$data1,$data2]
 
 data=$(seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32,uint256)" $targets $values $datas $PREDECESSOR $SALT $DELAY)
 
-seth call -F $WALLET $TIMELOCK $data
+# seth call -F $WALLET $TIMELOCK $data
 
 seth send -F $ETH_FROM $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data --chain darwinia
 count=$(seth call $WALLET "transactionCount()(uint)" --chain darwinia)
