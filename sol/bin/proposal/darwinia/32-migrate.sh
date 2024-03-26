@@ -17,6 +17,6 @@ data4=$(seth calldata "transferxTokenOwnership(address,address)" 0x656567Eb75b76
 
 datas=[$data1,$data2,$data3,$data4]
 
-seth calldata "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain darwinia
+seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain darwinia
 # seth send $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain darwinia
 
