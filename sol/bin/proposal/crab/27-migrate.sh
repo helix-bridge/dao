@@ -2,6 +2,7 @@
 
 set -eox pipefail
 
+OWNER=0x7aE77149ed38c5dD313e9069d790Ce7085caf0A6
 WALLET=0x0050F880c35c31c13BFd9cBb7D28AafaEcA3abd2
 TIMELOCK=0x000000000f681D85374225EdEeADC25560C1fb3F
 
@@ -20,9 +21,9 @@ datas=[$data1,$data2,$data3,$data4]
 
 data=$(seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32,uint256)" $targets $values $datas $PREDECESSOR $SALT $DELAY)
 
-# seth call -F $WALLET $TIMELOCK $data --chain crab
-# seth send $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data --chain crab
-# count=$(seth call $WALLET "transactionCount()(uint)" --chain crab)
-# seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 )) --chain crab
+seth call -F $WALLET $TIMELOCK $data --chain crab
+seth send -F $OWNER $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data --chain crab
+count=$(seth call $WALLET "transactionCount()(uint)" --chain crab)
+seth call -F $OWNER $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 )) --chain crab
 
-# seth send $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain crab
+# seth send -F $$OWNER $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain crab
