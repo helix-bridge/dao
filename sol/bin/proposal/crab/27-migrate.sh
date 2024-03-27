@@ -19,7 +19,11 @@ data4=$(seth calldata "transferxTokenOwnership(address,address)" 0x273131F7CB50a
 
 datas=[$data1,$data2,$data3,$data4]
 
-data=$(seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32,uint256)" $targets $values $datas $PREDECESSOR $SALT $DELAY)
+# data=$(seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32,uint256)" $targets $values $datas $PREDECESSOR $SALT $DELAY)
+
+id=$(seth call $TIMELOCK "hashOperationBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain crab)
+
+data=$(seth calldata "cancel(bytes32)" $id)
 
 seth call -F $WALLET $TIMELOCK $data --chain crab
 seth send -F $OWNER $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data --chain crab
