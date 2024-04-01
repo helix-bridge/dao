@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -eox pipefail
+
+TIMELOCK=0x000000000f681D85374225EdEeADC25560C1fb3F
+
+SALT=0x0000000000000000000000000000000000000000000000000000000000000003
+PREDECESSOR=0x0000000000000000000000000000000000000000000000000000000000000000
+DELAY=1800
+
+target=0x65Be094765731F394bc6d9DF53bDF3376F1Fc8B0
+value=0
+data1=0x79ba5097
+
+
+data=$(seth calldata "schedule(address,uint256,bytes,bytes32,bytes32,uint256)" $target $value $data1 $PREDECESSOR $SALT $DELAY)
+
+seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT --chain darwinia
+

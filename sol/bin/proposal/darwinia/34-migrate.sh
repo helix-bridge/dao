@@ -26,13 +26,13 @@ datas=[$data1,$data2]
 
 data=$(seth calldata "scheduleBatch(address[],uint256[],bytes[],bytes32,bytes32,uint256)" $targets $values $datas $PREDECESSOR $SALT $DELAY)
 
-seth call -F $WALLET $TIMELOCK $data --chain darwinia
+# seth call -F $WALLET $TIMELOCK $data --chain darwinia
 
 # seth send -F $ETH_FROM $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data --chain darwinia
-count=$(seth call $WALLET "transactionCount()(uint)" --chain darwinia)
-seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 )) --chain darwinia
+# count=$(seth call $WALLET "transactionCount()(uint)" --chain darwinia)
+# seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 )) --chain darwinia
 
 id=$(seth call $TIMELOCK "hashOperationBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain darwinia)
 date -r $(seth call $TIMELOCK "getTimestamp(bytes32)(uint)" $id --chain darwinia) '+%Y-%m-%d %H:%M:%S'
 
-# seth send -F $ETH_FROM $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain darwinia
+seth send -F $ETH_FROM $TIMELOCK "executeBatch(address[],uint256[],bytes[],bytes32,bytes32)" $targets $values $datas $PREDECESSOR $SALT --chain darwinia
