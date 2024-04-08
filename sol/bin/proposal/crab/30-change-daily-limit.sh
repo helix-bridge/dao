@@ -17,14 +17,10 @@ data1=$(seth calldata "setDailyLimit(address,uint256)" 0x2D2b97EA380b0185e9fDF82
 
 data=$(seth calldata "schedule(address,uint256,bytes,bytes32,bytes32,uint256)" $target $value $data1 $PREDECESSOR $SALT $DELAY)
 
-seth call -F $TIMELOCK $BRIDGE $data1 --chain crab
-seth call -F $WALLET $TIMELOCK $data --chain crab
-seth send -F $OWNER $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data --chain crab
-count=$(seth call $WALLET "transactionCount()(uint)" --chain crab)
-seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 )) --chain crab
+# seth call -F $TIMELOCK $BRIDGE $data1 --chain crab
+# seth call -F $WALLET $TIMELOCK $data --chain crab
+# seth send -F $OWNER $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data --chain crab
+# count=$(seth call $WALLET "transactionCount()(uint)" --chain crab)
+# seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 )) --chain crab
 
-# op_hash=$(seth call $TIMELOCK "hashOperation(address,uint256,bytes,bytes32,bytes32)(bytes32)" $target $value $data1 $PREDECESSOR $SALT --chain crab)
-# date -r $(seth call $TIMELOCK "getTimestamp(bytes32)(uint)" $op_hash --chain darwinia) '+%Y-%m-%d %H:%M:%S'
-
-# seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT --chain crab
-
+seth send $TIMELOCK "execute(address,uint256,bytes,bytes32,bytes32)" $target $value $data1 $PREDECESSOR $SALT --chain crab
