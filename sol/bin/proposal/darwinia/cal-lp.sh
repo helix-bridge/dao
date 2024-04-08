@@ -16,7 +16,7 @@ LP=$(seth call $PAIR "balanceOf(address)(uint)" $TIMELOCK --chain darwinia)
 TOTALSUPPLY0=$(seth call $PAIR "totalSupply()(uint)" --chain darwinia)
 BALANCE0=$(seth call $WRING "balanceOf(address)(uint)" $PAIR --chain darwinia)
 BALANCE1=$(seth call $xWCRAB "balanceOf(address)(uint)" $PAIR --chain darwinia)
-WRING_AMOUT_OUT=$(cal "$LP * $BALANCE0 / $TOTALSUPPLY0 * 0.997")
-xWCRAB_AMOUT_OUT=$(cal "$LP * $BALANCE1 / $TOTALSUPPLY0 * 0.997")
+WRING_AMOUT_OUT=$(cal "$LP * $BALANCE0 / $TOTALSUPPLY0 * 0.99")
+xWCRAB_AMOUT_OUT=$(cal "$LP * $BALANCE1 / $TOTALSUPPLY0 * 0.99")
 echo "WRING:  $(seth --to-fix 18 $WRING_AMOUT_OUT)"
 echo "xWCRAB: $(seth --to-fix 18 $xWCRAB_AMOUT_OUT)"
