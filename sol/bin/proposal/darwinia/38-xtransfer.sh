@@ -44,6 +44,6 @@ echo "Helix Multisig execute data: $data"
 
 seth call -F $WALLET $TIMELOCK $data --chain darwinia
 
-# seth send -F $ETH_FROM $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data --chain darwinia
-# count=$(seth call $WALLET "transactionCount()(uint)" --chain darwinia)
-# seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 )) --chain darwinia
+seth send -F $ETH_FROM $WALLET "submitTransaction(address,uint,bytes)" $TIMELOCK 0 $data --chain darwinia
+count=$(seth call $WALLET "transactionCount()(uint)" --chain darwinia)
+seth call $WALLET "transactions(uint)(address,uint,bytes,bool)" $(( $count - 1 )) --chain darwinia
